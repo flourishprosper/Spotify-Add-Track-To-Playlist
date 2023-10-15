@@ -4,6 +4,8 @@ import queryString from "query-string";
 import TrackEmbed from './components/TrackEmbed';
 import PlaylistSelector from './components/PlaylistSelector';
 import Navigation from './components/Navigation';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -68,19 +70,30 @@ function App() {
   };
 
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col items-center justify-between p-5">
+    <Router>
+      <div className="bg-black text-white min-h-screen flex flex-col items-center justify-between p-5">
         <Navigation isLoggedIn={token} setToken={setToken} />
-        <TrackEmbed trackId={trackId} />
-        {token && (
-            <PlaylistSelector 
-                token={token} 
-                playlists={playlists} 
-                setSelectedPlaylist={setSelectedPlaylist} 
-                addTrackToPlaylist={addTrackToPlaylist} 
-            />
-        )}
-    </div>
-);
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/track/:trackId" element={
+            <>
+              <TrackEmbed trackId={trackId} />
+              {token && (
+                <PlaylistSelector 
+                  token={token} 
+                  playlists={playlists} 
+                  setSelectedPlaylist={setSelectedPlaylist} 
+                  addTrackToPlaylist={addTrackToPlaylist} 
+                />
+              )}
+            </>
+          } />
+          {/* Add more routes as needed */}
+        </Routes>
+      </div>
+    </Router>
+  );
 
 }
 

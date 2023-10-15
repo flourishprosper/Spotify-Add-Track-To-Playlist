@@ -1,5 +1,7 @@
 import React from 'react';
 import Auth from './Auth';
+import { Link } from 'react-router-dom';
+
 
 function Navigation({ isLoggedIn, setToken }) {
     return (
@@ -10,8 +12,7 @@ function Navigation({ isLoggedIn, setToken }) {
                     
                     {/* Links */}
                     <div className="flex space-x-4">
-                        <a href="#home" className="text-white">Home</a>
-                        <a href="#adds" className="text-white">Adds</a>
+                    <Link to="/" className="text-white">Home</Link>
                         
                         {/* Auth Component */}
                         <Auth isLoggedIn={isLoggedIn} setToken={setToken} />
