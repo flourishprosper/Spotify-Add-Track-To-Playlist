@@ -60,7 +60,6 @@ function App() {
     <Router>
       <div className="bg-black text-white min-h-screen flex flex-col items-center justify-between p-5">
         <Navigation isLoggedIn={token} setToken={setToken} />
-  
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/track/:trackId" element={<Track 

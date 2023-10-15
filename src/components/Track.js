@@ -19,6 +19,15 @@ function Track({ token, playlists, setSelectedPlaylist, addTrackToPlaylist }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
       <TrackEmbed trackId={trackId} />
+      {token && (
+        <PlaylistSelector 
+            trackId={trackId} 
+            token={token} 
+            playlists={playlists} 
+            setSelectedPlaylist={setSelectedPlaylist} 
+            addTrackToPlaylist={addTrackToPlaylist} 
+        />
+      )}
 
       {/* Copy Link Button */}
       <button onClick={copyLinkToClipboard} className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full mx-2 mt-2">
@@ -30,15 +39,7 @@ function Track({ token, playlists, setSelectedPlaylist, addTrackToPlaylist }) {
         <QRCode value={window.location.origin + location.pathname} />
       </div>
 
-      {token && (
-        <PlaylistSelector 
-            trackId={trackId} 
-            token={token} 
-            playlists={playlists} 
-            setSelectedPlaylist={setSelectedPlaylist} 
-            addTrackToPlaylist={addTrackToPlaylist} 
-        />
-      )}
+
     </div>
   );
 }

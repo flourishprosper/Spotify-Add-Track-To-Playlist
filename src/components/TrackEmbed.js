@@ -11,7 +11,7 @@ function TrackEmbed() {
         className="w-full md:w-1/2 my-2"  // Modified width here
         src={`https://open.spotify.com/embed/track/${trackId}`}
         width="500"  // Adjusted width
-        height="500"  // Adjusted height
+        height="300"  // Adjusted height
         frameBorder="0"
         allowtransparency="true"
         allow="encrypted-media"
