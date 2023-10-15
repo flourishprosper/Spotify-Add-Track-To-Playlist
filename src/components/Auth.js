@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AUTH_URL =
-  "https://accounts.spotify.com/authorize?client_id=455809f1f15a42a38d2635c3dcfc81ea&response_type=token&redirect_uri=http://localhost:3000/&scope=playlist-modify-private%20playlist-modify-public";
+  "https://accounts.spotify.com/authorize?client_id=455809f1f15a42a38d2635c3dcfc81ea&response_type=token&redirect_uri=http://trakl.ink/&scope=playlist-modify-private%20playlist-modify-public";
 
   function Auth({ isLoggedIn, setToken }) {
     const handleLogout = () => {
@@ -13,10 +13,10 @@ const AUTH_URL =
       
         // Redirect to the track page with the track ID
         if (storedTrackId) {
-          window.location.href = `http://localhost:3000/track/${storedTrackId}`;
+          window.location.href = `http://trakl.ink/track/${storedTrackId}`;
         } else {
           // If there's no stored track ID, you can redirect to the homepage or any other page as needed
-          window.location.href = "http://localhost:3000/";
+          window.location.href = "http://trakl.ink/";
         }
       };
       

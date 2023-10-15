@@ -33,7 +33,7 @@ function App() {
         // Retrieve track ID from localStorage and redirect
         const storedTrackId = localStorage.getItem("trackId");
         if (storedTrackId) {
-            window.location.href = `http://localhost:3000/track/${storedTrackId}`;
+            window.location.href = `https://trakl.ink/track/${storedTrackId}`;
         }
     } else if (trackId) {
         // Store track ID in localStorage before authentication
