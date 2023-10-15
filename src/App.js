@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import queryString from "query-string";
-import TrackEmbed from './components/TrackEmbed';
-import PlaylistSelector from './components/PlaylistSelector';
 import Navigation from './components/Navigation';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, } from 'react-router-dom';
 import Home from './components/Home';
+import Track from './components/Track';  // Adjust the path as necessary
+
 
 function App() {
   const [token, setToken] = useState(null);
@@ -74,23 +74,14 @@ function App() {
       <div className="bg-black text-white min-h-screen flex flex-col items-center justify-between p-5">
         <Navigation isLoggedIn={token} setToken={setToken} />
         
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/track/:trackId" element={
-            <>
-              <TrackEmbed trackId={trackId} />
-              {token && (
-                <PlaylistSelector 
-                  token={token} 
-                  playlists={playlists} 
-                  setSelectedPlaylist={setSelectedPlaylist} 
-                  addTrackToPlaylist={addTrackToPlaylist} 
-                />
-              )}
-            </>
-          } />
-          {/* Add more routes as needed */}
-        </Routes>
+        <Route path="/" element={<Home />} />
+          <Route path="/track/:trackId" element={<Track 
+            trackId={trackId} 
+            token={token} 
+            playlists={playlists}
+            setSelectedPlaylist={setSelectedPlaylist}
+            addTrackToPlaylist={addTrackToPlaylist}
+          />} />
       </div>
     </Router>
   );
