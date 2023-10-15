@@ -11,6 +11,7 @@ function Track({ token, playlists, setSelectedPlaylist, addTrackToPlaylist }) {
     <TrackEmbed trackId={trackId} />
     {token && (
         <PlaylistSelector 
+            trackId={trackId} 
             token={token} 
             playlists={playlists} 
             setSelectedPlaylist={setSelectedPlaylist} 
