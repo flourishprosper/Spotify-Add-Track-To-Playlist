@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import queryString from "query-string";
 import Navigation from './components/Navigation';
-import { BrowserRouter as Router, Route, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Track from './components/Track';  // Adjust the path as necessary
 
@@ -73,18 +73,21 @@ function App() {
     <Router>
       <div className="bg-black text-white min-h-screen flex flex-col items-center justify-between p-5">
         <Navigation isLoggedIn={token} setToken={setToken} />
-        
-        <Route path="/" element={<Home />} />
+  
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/track/:trackId" element={<Track 
-            trackId={trackId} 
-            token={token} 
-            playlists={playlists}
-            setSelectedPlaylist={setSelectedPlaylist}
-            addTrackToPlaylist={addTrackToPlaylist}
-          />} />
+              trackId={trackId} 
+              token={token} 
+              playlists={playlists}
+              setSelectedPlaylist={setSelectedPlaylist}
+              addTrackToPlaylist={addTrackToPlaylist}
+            />} />
+        </Routes>
       </div>
     </Router>
   );
+  
 
 }
 
