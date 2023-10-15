@@ -1,21 +1,24 @@
-// Track.js
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import TrackEmbed from './TrackEmbed';
 import PlaylistSelector from './PlaylistSelector';
 
-function Track({ trackId, token, playlists, setSelectedPlaylist, addTrackToPlaylist }) {
+function Track({ token, playlists, setSelectedPlaylist, addTrackToPlaylist }) {
+  const { trackId } = useParams();
+
   return (
-    <div>
-      <TrackEmbed trackId={trackId} />
-      {token && (
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+    <TrackEmbed trackId={trackId} />
+    {token && (
         <PlaylistSelector 
-          token={token} 
-          playlists={playlists} 
-          setSelectedPlaylist={setSelectedPlaylist} 
-          addTrackToPlaylist={addTrackToPlaylist} 
+            token={token} 
+            playlists={playlists} 
+            setSelectedPlaylist={setSelectedPlaylist} 
+            addTrackToPlaylist={addTrackToPlaylist} 
         />
-      )}
-    </div>
+    )}
+</div>
+
   );
 }
 

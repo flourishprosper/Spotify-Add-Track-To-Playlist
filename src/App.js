@@ -2,18 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import queryString from "query-string";
 import Navigation from './components/Navigation';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import Track from './components/Track';  // Adjust the path as necessary
-
+import Track from './components/Track';
 
 function App() {
   const [token, setToken] = useState(null);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-  
-  // Extract track ID from the URL
-  let trackId = window.location.pathname.split("/track/")[1]?.split("?")[0] || "";
 
   useEffect(() => {
     const storedToken = localStorage.getItem("spotifyToken");
@@ -26,20 +22,10 @@ function App() {
     if (window.location.hash) {
         const { access_token } = queryString.parse(window.location.hash);
         setToken(access_token);
-        // Store token in localStorage
         localStorage.setItem("spotifyToken", access_token);
         fetchPlaylists(access_token);
-        
-        // Retrieve track ID from localStorage and redirect
-        const storedTrackId = localStorage.getItem("trackId");
-        if (storedTrackId) {
-            window.location.href = `https://trakl.ink/track/${storedTrackId}`;
-        }
-    } else if (trackId) {
-        // Store track ID in localStorage before authentication
-        localStorage.setItem("trackId", trackId);
     }
-  }, [trackId]);
+  }, []);
 
   const fetchPlaylists = async (accessToken) => {
     try {
@@ -52,7 +38,8 @@ function App() {
     }
   };
 
-  const addTrackToPlaylist = async () => {
+  const addTrackToPlaylist = async (trackId) => {
+    if (!selectedPlaylist) return;
     try {
       await axios.post(
         `https://api.spotify.com/v1/playlists/${selectedPlaylist}/tracks`,
@@ -77,7 +64,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/track/:trackId" element={<Track 
-              trackId={trackId} 
               token={token} 
               playlists={playlists}
               setSelectedPlaylist={setSelectedPlaylist}
@@ -87,8 +73,6 @@ function App() {
       </div>
     </Router>
   );
-  
-
 }
 
 export default App;
